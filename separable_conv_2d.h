@@ -11,23 +11,23 @@ const int out_width = 3;
 
 void depthwise_conv_2d_cl(
 	ap_fixed<10,4> data[in_height * in_width * n_chan],
-	ap_fixed<10,4> res[out_height * out_width * n_chan],
+	ap_fixed<10,4> depthwise_res[out_height * out_width * n_chan],
 	ap_fixed<10,4> depthwise_weights[filt_height * filt_width * n_chan],
 	ap_fixed<10,4> depthwise_biases[n_chan]
 	);
 
 
 void pointwise_conv_2d_latency_cl(
-	ap_fixed<10,4> data2[out_height * out_width * n_filt],
-	ap_fixed<10,4> res2[out_height * out_width * n_filt],
+	ap_fixed<10,4> depthwise_res[out_height * out_width * n_filt],
+	ap_fixed<10,4> res[out_height * out_width * n_filt],
 	ap_fixed<10,4> pointwise_weights[n_chan * n_filt],
 	ap_fixed<10,4> pointwise_biases[n_filt]
 	);
 
 
 void separable_conv_2d_cl(
-	ap_fixed<10,4> data3[in_height * in_width * n_chan],
-	ap_fixed<10,4> result[out_height * out_width * n_filt],
+	ap_fixed<10,4> data[in_height * in_width * n_chan],
+	ap_fixed<10,4> res[out_height * out_width * n_filt],
   	ap_fixed<10,4> depthwise_weights[filt_height * filt_width * n_chan],
 	ap_fixed<10,4> pointwise_weights[n_chan * n_filt],
 	ap_fixed<10,4> depthwise_biases[n_chan],
