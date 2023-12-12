@@ -11,17 +11,22 @@ void depthwise_conv_2d_cl(
 	{
 		// multiple channels of input
 		for (int c = 0; c < n_chan; c++) {
+#pragma HLS unroll factor=2
 			int channel_start = c * in_height * in_width;
 			int kernel_start = c * filt_height * filt_width;
 			// depthwise output height
 			for (int h = 0; h < out_height; h++) {
+#pragma HLS unroll factor=2
 				// depthwise output width
 				for (int w = 0; w < out_width; w++) {
+#pragma HLS unroll factor=2
 					conv_data_t sum = depthwise_biases[c];
 
 					// kernel multiplication
 					for (int i = 0; i < filt_height; i++) {
+#pragma HLS unroll factor=2
 						for (int j = 0; j < filt_width; j++) {
+#pragma HLS unroll factor=2
 							int data_idx = channel_start + (h + i) * in_width + (w + j);
 							int weight_idx = kernel_start + i * filt_width + j;
 							sum += static_cast<conv_data_t>(data[data_idx]) * depthwise_weights[weight_idx];
@@ -45,14 +50,18 @@ void pointwise_conv_2d_latency_cl(
 	{
 		// pointwise output height
 		for (int h = 0; h < out_height; h++) {
+#pragma HLS unroll factor=2
 			// pointwise output width
 			for (int w = 0; w < out_width; w++) {
+#pragma HLS unroll factor=2
 				// output number of channels
 				for (int f = 0; f < n_filt; f++) {
+#pragma HLS unroll factor=2
 					conv_data_t sum = pointwise_biases[f];
 
 					// kernel multiplication
 					for (int c = 0; c < n_chan; c++) {
+#pragma HLS unroll factor=2
 						int data_idx = c * (out_height * out_width) + h * out_width + w;
 						int weight_idx = f * n_chan + c;
 						sum += depthwise_res[data_idx] * pointwise_weights[weight_idx];
