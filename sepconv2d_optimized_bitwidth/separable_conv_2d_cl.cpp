@@ -1,14 +1,13 @@
-#include <ap_fixed.h>
 #include "separable_conv_2d_cl.h"
 
 
 // Depthwise convolution
 // Flatten the 2d feature map into 1d array for easier operations
 void depthwise_conv_2d_cl(
-	int data[in_height * in_width * n_chan],
-	int depthwise_res[out_height * out_width * n_chan],
-	int depthwise_weights[filt_height * filt_width * n_chan],
-	int depthwise_biases[n_chan])
+	rgb_data_t data[in_height * in_width * n_chan],
+	conv_data_t depthwise_res[out_height * out_width * n_chan],
+	weight_t depthwise_weights[filt_height * filt_width * n_chan],
+	conv_data_t depthwise_biases[n_chan])
 	{
 		// multiple channels of input
 		for (int c = 0; c < n_chan; c++) {
@@ -18,14 +17,14 @@ void depthwise_conv_2d_cl(
 			for (int h = 0; h < out_height; h++) {
 				// depthwise output width
 				for (int w = 0; w < out_width; w++) {
-					int sum = depthwise_biases[c];\
+					conv_data_t sum = depthwise_biases[c];
 
 					// kernel multiplication
 					for (int i = 0; i < filt_height; i++) {
 						for (int j = 0; j < filt_width; j++) {
 							int data_idx = channel_start + (h + i) * in_width + (w + j);
 							int weight_idx = kernel_start + i * filt_width + j;
-							sum += data[data_idx] * depthwise_weights[weight_idx];
+							sum += static_cast<conv_data_t>(data[data_idx]) * depthwise_weights[weight_idx];
 						}
 					}
 					int res_idx = c * (out_height * out_width) + h * out_width + w;
@@ -39,10 +38,10 @@ void depthwise_conv_2d_cl(
 // Pointwise convolution
 // Flatten the 2d feature map into 1d array for easier operations
 void pointwise_conv_2d_latency_cl(
-	int depthwise_res[out_height * out_width * n_chan],
-	int res[out_height * out_width * n_filt],
-	int pointwise_weights[n_chan * n_filt],
-	int pointwise_biases[n_filt])
+	conv_data_t depthwise_res[out_height * out_width * n_chan],
+	conv_data_t res[out_height * out_width * n_filt],
+	weight_t pointwise_weights[n_chan * n_filt],
+	conv_data_t pointwise_biases[n_filt])
 	{
 		// pointwise output height
 		for (int h = 0; h < out_height; h++) {
@@ -50,7 +49,7 @@ void pointwise_conv_2d_latency_cl(
 			for (int w = 0; w < out_width; w++) {
 				// output number of channels
 				for (int f = 0; f < n_filt; f++) {
-					int sum = pointwise_biases[f];
+					conv_data_t sum = pointwise_biases[f];
 
 					// kernel multiplication
 					for (int c = 0; c < n_chan; c++) {
@@ -67,13 +66,13 @@ void pointwise_conv_2d_latency_cl(
 
 
 void separable_conv_2d_cl(
-	int data[in_height * in_width * n_chan],
-	int depthwise_res[out_height * out_width * n_chan],
-	int res[out_height * out_width * n_filt],
-	int depthwise_weights[filt_height * filt_width * n_chan],
-	int pointwise_weights[n_chan * n_filt],
-	int depthwise_biases[n_chan],
-	int pointwise_biases[n_filt]){
+	rgb_data_t data[in_height * in_width * n_chan],
+	conv_data_t depthwise_res[out_height * out_width * n_chan],
+	conv_data_t res[out_height * out_width * n_filt],
+	weight_t depthwise_weights[filt_height * filt_width * n_chan],
+	weight_t pointwise_weights[n_chan * n_filt],
+	conv_data_t depthwise_biases[n_chan],
+	conv_data_t pointwise_biases[n_filt]){
 
 	depthwise_conv_2d_cl(data, depthwise_res, depthwise_weights, depthwise_biases);
 	pointwise_conv_2d_latency_cl(depthwise_res, res,pointwise_weights, pointwise_biases);
