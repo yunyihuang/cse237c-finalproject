@@ -10,13 +10,17 @@ void depthwise_conv_2d_cl(
 	int depthwise_weights[filt_height * filt_width * n_chan],
 	int depthwise_biases[n_chan])
 	{
+		// multiple channels of input
 		for (int c = 0; c < n_chan; c++) {
 			int channel_start = c * in_height * in_width;
 			int kernel_start = c * filt_height * filt_width;
-
+			// depthwise output height
 			for (int h = 0; h < out_height; h++) {
+				// depthwise output width
 				for (int w = 0; w < out_width; w++) {
-					int sum = depthwise_biases[c];
+					int sum = depthwise_biases[c];\
+
+					// kernel multiplication
 					for (int i = 0; i < filt_height; i++) {
 						for (int j = 0; j < filt_width; j++) {
 							int data_idx = channel_start + (h + i) * in_width + (w + j);
@@ -48,7 +52,7 @@ void pointwise_conv_2d_latency_cl(
 				for (int f = 0; f < n_filt; f++) {
 					int sum = pointwise_biases[f];
 
-					// kernel/filter multiplication
+					// kernel multiplication
 					for (int c = 0; c < n_chan; c++) {
 						int data_idx = c * (out_height * out_width) + h * out_width + w;
 						int weight_idx = f * n_chan + c;
