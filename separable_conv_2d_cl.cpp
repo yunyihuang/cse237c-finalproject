@@ -1,5 +1,5 @@
 #include <ap_fixed.h>
-#include "separable_conv_2d.h"
+#include "separable_conv_2d_cl.h"
 
 
 // Depthwise convolution
