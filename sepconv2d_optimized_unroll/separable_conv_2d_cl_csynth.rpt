@@ -1,0 +1,184 @@
+
+
+================================================================
+== Vitis HLS Report for 'separable_conv_2d_cl'
+================================================================
+* Date:           Mon Dec 11 23:12:57 2023
+
+* Version:        2023.1 (Build 3854077 on May  4 2023)
+* Project:        sepconv2d_optimized_unroll
+* Solution:       solution1 (Vivado IP Flow Target)
+* Product family: zynq
+* Target device:  xc7z020-clg400-1
+
+
+================================================================
+== Performance Estimates
+================================================================
++ Timing: 
+    * Summary: 
+    +--------+----------+----------+------------+
+    |  Clock |  Target  | Estimated| Uncertainty|
+    +--------+----------+----------+------------+
+    |ap_clk  |  10.00 ns|  4.422 ns|     2.70 ns|
+    +--------+----------+----------+------------+
+
++ Latency: 
+    * Summary: 
+    +---------+---------+----------+----------+-----+-----+---------+
+    |  Latency (cycles) |  Latency (absolute) |  Interval | Pipeline|
+    |   min   |   max   |    min   |    max   | min | max |   Type  |
+    +---------+---------+----------+----------+-----+-----+---------+
+    |       31|       31|  0.310 us|  0.310 us|   32|   32|       no|
+    +---------+---------+----------+----------+-----+-----+---------+
+
+    + Detail: 
+        * Instance: 
+        +----------------------------------------+------------------------------+---------+---------+----------+----------+-----+-----+---------+
+        |                                        |                              |  Latency (cycles) |  Latency (absolute) |  Interval | Pipeline|
+        |                Instance                |            Module            |   min   |   max   |    min   |    max   | min | max |   Type  |
+        +----------------------------------------+------------------------------+---------+---------+----------+----------+-----+-----+---------+
+        |grp_depthwise_conv_2d_cl_fu_65          |depthwise_conv_2d_cl          |       17|       17|  0.170 us|  0.170 us|   17|   17|       no|
+        |grp_pointwise_conv_2d_latency_cl_fu_77  |pointwise_conv_2d_latency_cl  |       11|       11|  0.110 us|  0.110 us|   11|   11|       no|
+        +----------------------------------------+------------------------------+---------+---------+----------+----------+-----+-----+---------+
+
+        * Loop: 
+        N/A
+
+
+
+================================================================
+== Utilization Estimates
+================================================================
+* Summary: 
++-----------------+---------+-----+--------+-------+-----+
+|       Name      | BRAM_18K| DSP |   FF   |  LUT  | URAM|
++-----------------+---------+-----+--------+-------+-----+
+|DSP              |        -|    -|       -|      -|    -|
+|Expression       |        -|    -|       -|      -|    -|
+|FIFO             |        -|    -|       -|      -|    -|
+|Instance         |        -|   72|     888|    771|    -|
+|Memory           |        -|    -|       -|      -|    -|
+|Multiplexer      |        -|    -|       -|     99|    -|
+|Register         |        -|    -|      26|      -|    -|
++-----------------+---------+-----+--------+-------+-----+
+|Total            |        0|   72|     914|    870|    0|
++-----------------+---------+-----+--------+-------+-----+
+|Available        |      280|  220|  106400|  53200|    0|
++-----------------+---------+-----+--------+-------+-----+
+|Utilization (%)  |        0|   32|      ~0|      1|    0|
++-----------------+---------+-----+--------+-------+-----+
+
++ Detail: 
+    * Instance: 
+    +----------------------------------------+------------------------------+---------+----+-----+-----+-----+
+    |                Instance                |            Module            | BRAM_18K| DSP|  FF | LUT | URAM|
+    +----------------------------------------+------------------------------+---------+----+-----+-----+-----+
+    |grp_depthwise_conv_2d_cl_fu_65          |depthwise_conv_2d_cl          |        0|  48|  700|  492|    0|
+    |grp_pointwise_conv_2d_latency_cl_fu_77  |pointwise_conv_2d_latency_cl  |        0|  24|  188|  279|    0|
+    +----------------------------------------+------------------------------+---------+----+-----+-----+-----+
+    |Total                                   |                              |        0|  72|  888|  771|    0|
+    +----------------------------------------+------------------------------+---------+----+-----+-----+-----+
+
+    * DSP: 
+    N/A
+
+    * Memory: 
+    N/A
+
+    * FIFO: 
+    N/A
+
+    * Expression: 
+    N/A
+
+    * Multiplexer: 
+    +------------------------+----+-----------+-----+-----------+
+    |          Name          | LUT| Input Size| Bits| Total Bits|
+    +------------------------+----+-----------+-----+-----------+
+    |ap_NS_fsm               |  25|          5|    1|          5|
+    |depthwise_res_address0  |  14|          3|    4|         12|
+    |depthwise_res_address1  |  14|          3|    4|         12|
+    |depthwise_res_ce0       |  14|          3|    1|          3|
+    |depthwise_res_ce1       |  14|          3|    1|          3|
+    |depthwise_res_we0       |   9|          2|    1|          2|
+    |depthwise_res_we1       |   9|          2|    1|          2|
+    +------------------------+----+-----------+-----+-----------+
+    |Total                   |  99|         21|   13|         39|
+    +------------------------+----+-----------+-----+-----------+
+
+    * Register: 
+    +-----------------------------------------------------+----+----+-----+-----------+
+    |                         Name                        | FF | LUT| Bits| Const Bits|
+    +-----------------------------------------------------+----+----+-----+-----------+
+    |ap_CS_fsm                                            |   4|   0|    4|          0|
+    |grp_depthwise_conv_2d_cl_fu_65_ap_start_reg          |   1|   0|    1|          0|
+    |grp_pointwise_conv_2d_latency_cl_fu_77_ap_start_reg  |   1|   0|    1|          0|
+    |pointwise_biases_load_1_reg_106                      |  10|   0|   10|          0|
+    |pointwise_biases_load_reg_101                        |  10|   0|   10|          0|
+    +-----------------------------------------------------+----+----+-----+-----------+
+    |Total                                                |  26|   0|   26|          0|
+    +-----------------------------------------------------+----+----+-----+-----------+
+
+
+
+================================================================
+== Interface
+================================================================
+* Summary: 
++----------------------------+-----+-----+------------+----------------------+--------------+
+|          RTL Ports         | Dir | Bits|  Protocol  |     Source Object    |    C Type    |
++----------------------------+-----+-----+------------+----------------------+--------------+
+|ap_clk                      |   in|    1|  ap_ctrl_hs|  separable_conv_2d_cl|  return value|
+|ap_rst                      |   in|    1|  ap_ctrl_hs|  separable_conv_2d_cl|  return value|
+|ap_start                    |   in|    1|  ap_ctrl_hs|  separable_conv_2d_cl|  return value|
+|ap_done                     |  out|    1|  ap_ctrl_hs|  separable_conv_2d_cl|  return value|
+|ap_idle                     |  out|    1|  ap_ctrl_hs|  separable_conv_2d_cl|  return value|
+|ap_ready                    |  out|    1|  ap_ctrl_hs|  separable_conv_2d_cl|  return value|
+|data_address0               |  out|    5|   ap_memory|                  data|         array|
+|data_ce0                    |  out|    1|   ap_memory|                  data|         array|
+|data_q0                     |   in|    8|   ap_memory|                  data|         array|
+|data_address1               |  out|    5|   ap_memory|                  data|         array|
+|data_ce1                    |  out|    1|   ap_memory|                  data|         array|
+|data_q1                     |   in|    8|   ap_memory|                  data|         array|
+|depthwise_res_address0      |  out|    4|   ap_memory|         depthwise_res|         array|
+|depthwise_res_ce0           |  out|    1|   ap_memory|         depthwise_res|         array|
+|depthwise_res_we0           |  out|    1|   ap_memory|         depthwise_res|         array|
+|depthwise_res_d0            |  out|   10|   ap_memory|         depthwise_res|         array|
+|depthwise_res_q0            |   in|   10|   ap_memory|         depthwise_res|         array|
+|depthwise_res_address1      |  out|    4|   ap_memory|         depthwise_res|         array|
+|depthwise_res_ce1           |  out|    1|   ap_memory|         depthwise_res|         array|
+|depthwise_res_we1           |  out|    1|   ap_memory|         depthwise_res|         array|
+|depthwise_res_d1            |  out|   10|   ap_memory|         depthwise_res|         array|
+|depthwise_res_q1            |   in|   10|   ap_memory|         depthwise_res|         array|
+|res_address0                |  out|    3|   ap_memory|                   res|         array|
+|res_ce0                     |  out|    1|   ap_memory|                   res|         array|
+|res_we0                     |  out|    1|   ap_memory|                   res|         array|
+|res_d0                      |  out|   10|   ap_memory|                   res|         array|
+|res_address1                |  out|    3|   ap_memory|                   res|         array|
+|res_ce1                     |  out|    1|   ap_memory|                   res|         array|
+|res_we1                     |  out|    1|   ap_memory|                   res|         array|
+|res_d1                      |  out|   10|   ap_memory|                   res|         array|
+|depthwise_weights_address0  |  out|    4|   ap_memory|     depthwise_weights|         array|
+|depthwise_weights_ce0       |  out|    1|   ap_memory|     depthwise_weights|         array|
+|depthwise_weights_q0        |   in|   16|   ap_memory|     depthwise_weights|         array|
+|depthwise_weights_address1  |  out|    4|   ap_memory|     depthwise_weights|         array|
+|depthwise_weights_ce1       |  out|    1|   ap_memory|     depthwise_weights|         array|
+|depthwise_weights_q1        |   in|   16|   ap_memory|     depthwise_weights|         array|
+|pointwise_weights_address0  |  out|    3|   ap_memory|     pointwise_weights|         array|
+|pointwise_weights_ce0       |  out|    1|   ap_memory|     pointwise_weights|         array|
+|pointwise_weights_q0        |   in|   16|   ap_memory|     pointwise_weights|         array|
+|pointwise_weights_address1  |  out|    3|   ap_memory|     pointwise_weights|         array|
+|pointwise_weights_ce1       |  out|    1|   ap_memory|     pointwise_weights|         array|
+|pointwise_weights_q1        |   in|   16|   ap_memory|     pointwise_weights|         array|
+|depthwise_biases_address0   |  out|    2|   ap_memory|      depthwise_biases|         array|
+|depthwise_biases_ce0        |  out|    1|   ap_memory|      depthwise_biases|         array|
+|depthwise_biases_q0         |   in|   10|   ap_memory|      depthwise_biases|         array|
+|pointwise_biases_address0   |  out|    1|   ap_memory|      pointwise_biases|         array|
+|pointwise_biases_ce0        |  out|    1|   ap_memory|      pointwise_biases|         array|
+|pointwise_biases_q0         |   in|   10|   ap_memory|      pointwise_biases|         array|
+|pointwise_biases_address1   |  out|    1|   ap_memory|      pointwise_biases|         array|
+|pointwise_biases_ce1        |  out|    1|   ap_memory|      pointwise_biases|         array|
+|pointwise_biases_q1         |   in|   10|   ap_memory|      pointwise_biases|         array|
++----------------------------+-----+-----+------------+----------------------+--------------+
+

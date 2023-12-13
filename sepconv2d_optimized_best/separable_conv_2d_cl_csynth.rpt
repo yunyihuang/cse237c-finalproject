@@ -1,0 +1,263 @@
+
+
+================================================================
+== Vitis HLS Report for 'separable_conv_2d_cl'
+================================================================
+* Date:           Tue Dec 12 18:59:41 2023
+
+* Version:        2023.1 (Build 3854077 on May  4 2023)
+* Project:        sepconv2d_optimized_best
+* Solution:       solution1 (Vivado IP Flow Target)
+* Product family: zynq
+* Target device:  xc7z020-clg400-1
+
+
+================================================================
+== Performance Estimates
+================================================================
++ Timing: 
+    * Summary: 
+    +--------+----------+----------+------------+
+    |  Clock |  Target  | Estimated| Uncertainty|
+    +--------+----------+----------+------------+
+    |ap_clk  |  10.00 ns|  4.960 ns|     2.70 ns|
+    +--------+----------+----------+------------+
+
++ Latency: 
+    * Summary: 
+    +---------+---------+----------+----------+-----+-----+---------+
+    |  Latency (cycles) |  Latency (absolute) |  Interval | Pipeline|
+    |   min   |   max   |    min   |    max   | min | max |   Type  |
+    +---------+---------+----------+----------+-----+-----+---------+
+    |       21|       21|  0.210 us|  0.210 us|   22|   22|       no|
+    +---------+---------+----------+----------+-----+-----+---------+
+
+    + Detail: 
+        * Instance: 
+        +----------------------------------------------------------+-----------------------------------------------+---------+---------+-----------+-----------+-----+-----+---------+
+        |                                                          |                                               |  Latency (cycles) |   Latency (absolute)  |  Interval | Pipeline|
+        |                         Instance                         |                     Module                    |   min   |   max   |    min    |    max    | min | max |   Type  |
+        +----------------------------------------------------------+-----------------------------------------------+---------+---------+-----------+-----------+-----+-----+---------+
+        |grp_depthwise_conv_2d_cl_fu_539                           |depthwise_conv_2d_cl                           |       10|       10|   0.100 us|   0.100 us|   10|   10|       no|
+        |grp_separable_conv_2d_cl_Pipeline_VITIS_LOOP_59_1_fu_647  |separable_conv_2d_cl_Pipeline_VITIS_LOOP_59_1  |        8|        8|  80.000 ns|  80.000 ns|    8|    8|       no|
+        +----------------------------------------------------------+-----------------------------------------------+---------+---------+-----------+-----------+-----+-----+---------+
+
+        * Loop: 
+        N/A
+
+
+
+================================================================
+== Utilization Estimates
+================================================================
+* Summary: 
++-----------------+---------+-----+--------+-------+-----+
+|       Name      | BRAM_18K| DSP |   FF   |  LUT  | URAM|
++-----------------+---------+-----+--------+-------+-----+
+|DSP              |        -|    -|       -|      -|    -|
+|Expression       |        -|    -|       -|      -|    -|
+|FIFO             |        -|    -|       -|      -|    -|
+|Instance         |        -|   28|     407|    449|    -|
+|Memory           |        -|    -|       -|      -|    -|
+|Multiplexer      |        -|    -|       -|    241|    -|
+|Register         |        -|    -|      26|      -|    -|
++-----------------+---------+-----+--------+-------+-----+
+|Total            |        0|   28|     433|    690|    0|
++-----------------+---------+-----+--------+-------+-----+
+|Available        |      280|  220|  106400|  53200|    0|
++-----------------+---------+-----+--------+-------+-----+
+|Utilization (%)  |        0|   12|      ~0|      1|    0|
++-----------------+---------+-----+--------+-------+-----+
+
++ Detail: 
+    * Instance: 
+    +----------------------------------------------------------+-----------------------------------------------+---------+----+-----+-----+-----+
+    |                         Instance                         |                     Module                    | BRAM_18K| DSP|  FF | LUT | URAM|
+    +----------------------------------------------------------+-----------------------------------------------+---------+----+-----+-----+-----+
+    |grp_depthwise_conv_2d_cl_fu_539                           |depthwise_conv_2d_cl                           |        0|  16|  257|  304|    0|
+    |grp_separable_conv_2d_cl_Pipeline_VITIS_LOOP_59_1_fu_647  |separable_conv_2d_cl_Pipeline_VITIS_LOOP_59_1  |        0|  12|  150|  145|    0|
+    +----------------------------------------------------------+-----------------------------------------------+---------+----+-----+-----+-----+
+    |Total                                                     |                                               |        0|  28|  407|  449|    0|
+    +----------------------------------------------------------+-----------------------------------------------+---------+----+-----+-----+-----+
+
+    * DSP: 
+    N/A
+
+    * Memory: 
+    N/A
+
+    * FIFO: 
+    N/A
+
+    * Expression: 
+    N/A
+
+    * Multiplexer: 
+    +---------------------------+----+-----------+-----+-----------+
+    |            Name           | LUT| Input Size| Bits| Total Bits|
+    +---------------------------+----+-----------+-----+-----------+
+    |ap_NS_fsm                  |  25|          5|    1|          5|
+    |depthwise_res_0_o          |   9|          2|   10|         20|
+    |depthwise_res_0_o_ap_vld   |   9|          2|    1|          2|
+    |depthwise_res_10_o         |   9|          2|   10|         20|
+    |depthwise_res_10_o_ap_vld  |   9|          2|    1|          2|
+    |depthwise_res_11_o         |   9|          2|   10|         20|
+    |depthwise_res_11_o_ap_vld  |   9|          2|    1|          2|
+    |depthwise_res_1_o          |   9|          2|   10|         20|
+    |depthwise_res_1_o_ap_vld   |   9|          2|    1|          2|
+    |depthwise_res_2_o          |   9|          2|   10|         20|
+    |depthwise_res_2_o_ap_vld   |   9|          2|    1|          2|
+    |depthwise_res_3_o          |   9|          2|   10|         20|
+    |depthwise_res_3_o_ap_vld   |   9|          2|    1|          2|
+    |depthwise_res_4_o          |   9|          2|   10|         20|
+    |depthwise_res_4_o_ap_vld   |   9|          2|    1|          2|
+    |depthwise_res_5_o          |   9|          2|   10|         20|
+    |depthwise_res_5_o_ap_vld   |   9|          2|    1|          2|
+    |depthwise_res_6_o          |   9|          2|   10|         20|
+    |depthwise_res_6_o_ap_vld   |   9|          2|    1|          2|
+    |depthwise_res_7_o          |   9|          2|   10|         20|
+    |depthwise_res_7_o_ap_vld   |   9|          2|    1|          2|
+    |depthwise_res_8_o          |   9|          2|   10|         20|
+    |depthwise_res_8_o_ap_vld   |   9|          2|    1|          2|
+    |depthwise_res_9_o          |   9|          2|   10|         20|
+    |depthwise_res_9_o_ap_vld   |   9|          2|    1|          2|
+    +---------------------------+----+-----------+-----+-----------+
+    |Total                      | 241|         53|  133|        269|
+    +---------------------------+----+-----------+-----+-----------+
+
+    * Register: 
+    +-----------------------------------------------------------------------+----+----+-----+-----------+
+    |                                  Name                                 | FF | LUT| Bits| Const Bits|
+    +-----------------------------------------------------------------------+----+----+-----+-----------+
+    |ap_CS_fsm                                                              |   4|   0|    4|          0|
+    |grp_depthwise_conv_2d_cl_fu_539_ap_start_reg                           |   1|   0|    1|          0|
+    |grp_separable_conv_2d_cl_Pipeline_VITIS_LOOP_59_1_fu_647_ap_start_reg  |   1|   0|    1|          0|
+    |shl_i_i27_i_i_175_i_reg_953                                            |  10|   0|   18|          8|
+    |shl_i_i27_i_i_i_reg_933                                                |  10|   0|   18|          8|
+    +-----------------------------------------------------------------------+----+----+-----+-----------+
+    |Total                                                                  |  26|   0|   42|         16|
+    +-----------------------------------------------------------------------+----+----+-----+-----------+
+
+
+
+================================================================
+== Interface
+================================================================
+* Summary: 
++---------------------------+-----+-----+------------+----------------------+--------------+
+|         RTL Ports         | Dir | Bits|  Protocol  |     Source Object    |    C Type    |
++---------------------------+-----+-----+------------+----------------------+--------------+
+|ap_clk                     |   in|    1|  ap_ctrl_hs|  separable_conv_2d_cl|  return value|
+|ap_rst                     |   in|    1|  ap_ctrl_hs|  separable_conv_2d_cl|  return value|
+|ap_start                   |   in|    1|  ap_ctrl_hs|  separable_conv_2d_cl|  return value|
+|ap_done                    |  out|    1|  ap_ctrl_hs|  separable_conv_2d_cl|  return value|
+|ap_idle                    |  out|    1|  ap_ctrl_hs|  separable_conv_2d_cl|  return value|
+|ap_ready                   |  out|    1|  ap_ctrl_hs|  separable_conv_2d_cl|  return value|
+|data_0                     |   in|    8|     ap_none|                data_0|       pointer|
+|data_1                     |   in|    8|     ap_none|                data_1|       pointer|
+|data_2                     |   in|    8|     ap_none|                data_2|       pointer|
+|data_3                     |   in|    8|     ap_none|                data_3|       pointer|
+|data_4                     |   in|    8|     ap_none|                data_4|       pointer|
+|data_5                     |   in|    8|     ap_none|                data_5|       pointer|
+|data_6                     |   in|    8|     ap_none|                data_6|       pointer|
+|data_7                     |   in|    8|     ap_none|                data_7|       pointer|
+|data_8                     |   in|    8|     ap_none|                data_8|       pointer|
+|data_9                     |   in|    8|     ap_none|                data_9|       pointer|
+|data_10                    |   in|    8|     ap_none|               data_10|       pointer|
+|data_11                    |   in|    8|     ap_none|               data_11|       pointer|
+|data_12                    |   in|    8|     ap_none|               data_12|       pointer|
+|data_13                    |   in|    8|     ap_none|               data_13|       pointer|
+|data_14                    |   in|    8|     ap_none|               data_14|       pointer|
+|data_15                    |   in|    8|     ap_none|               data_15|       pointer|
+|data_16                    |   in|    8|     ap_none|               data_16|       pointer|
+|data_17                    |   in|    8|     ap_none|               data_17|       pointer|
+|data_18                    |   in|    8|     ap_none|               data_18|       pointer|
+|data_19                    |   in|    8|     ap_none|               data_19|       pointer|
+|data_20                    |   in|    8|     ap_none|               data_20|       pointer|
+|data_21                    |   in|    8|     ap_none|               data_21|       pointer|
+|data_22                    |   in|    8|     ap_none|               data_22|       pointer|
+|data_23                    |   in|    8|     ap_none|               data_23|       pointer|
+|data_24                    |   in|    8|     ap_none|               data_24|       pointer|
+|data_25                    |   in|    8|     ap_none|               data_25|       pointer|
+|data_26                    |   in|    8|     ap_none|               data_26|       pointer|
+|depthwise_res_0_i          |   in|   10|     ap_ovld|       depthwise_res_0|       pointer|
+|depthwise_res_0_o          |  out|   10|     ap_ovld|       depthwise_res_0|       pointer|
+|depthwise_res_0_o_ap_vld   |  out|    1|     ap_ovld|       depthwise_res_0|       pointer|
+|depthwise_res_1_i          |   in|   10|     ap_ovld|       depthwise_res_1|       pointer|
+|depthwise_res_1_o          |  out|   10|     ap_ovld|       depthwise_res_1|       pointer|
+|depthwise_res_1_o_ap_vld   |  out|    1|     ap_ovld|       depthwise_res_1|       pointer|
+|depthwise_res_2_i          |   in|   10|     ap_ovld|       depthwise_res_2|       pointer|
+|depthwise_res_2_o          |  out|   10|     ap_ovld|       depthwise_res_2|       pointer|
+|depthwise_res_2_o_ap_vld   |  out|    1|     ap_ovld|       depthwise_res_2|       pointer|
+|depthwise_res_3_i          |   in|   10|     ap_ovld|       depthwise_res_3|       pointer|
+|depthwise_res_3_o          |  out|   10|     ap_ovld|       depthwise_res_3|       pointer|
+|depthwise_res_3_o_ap_vld   |  out|    1|     ap_ovld|       depthwise_res_3|       pointer|
+|depthwise_res_4_i          |   in|   10|     ap_ovld|       depthwise_res_4|       pointer|
+|depthwise_res_4_o          |  out|   10|     ap_ovld|       depthwise_res_4|       pointer|
+|depthwise_res_4_o_ap_vld   |  out|    1|     ap_ovld|       depthwise_res_4|       pointer|
+|depthwise_res_5_i          |   in|   10|     ap_ovld|       depthwise_res_5|       pointer|
+|depthwise_res_5_o          |  out|   10|     ap_ovld|       depthwise_res_5|       pointer|
+|depthwise_res_5_o_ap_vld   |  out|    1|     ap_ovld|       depthwise_res_5|       pointer|
+|depthwise_res_6_i          |   in|   10|     ap_ovld|       depthwise_res_6|       pointer|
+|depthwise_res_6_o          |  out|   10|     ap_ovld|       depthwise_res_6|       pointer|
+|depthwise_res_6_o_ap_vld   |  out|    1|     ap_ovld|       depthwise_res_6|       pointer|
+|depthwise_res_7_i          |   in|   10|     ap_ovld|       depthwise_res_7|       pointer|
+|depthwise_res_7_o          |  out|   10|     ap_ovld|       depthwise_res_7|       pointer|
+|depthwise_res_7_o_ap_vld   |  out|    1|     ap_ovld|       depthwise_res_7|       pointer|
+|depthwise_res_8_i          |   in|   10|     ap_ovld|       depthwise_res_8|       pointer|
+|depthwise_res_8_o          |  out|   10|     ap_ovld|       depthwise_res_8|       pointer|
+|depthwise_res_8_o_ap_vld   |  out|    1|     ap_ovld|       depthwise_res_8|       pointer|
+|depthwise_res_9_i          |   in|   10|     ap_ovld|       depthwise_res_9|       pointer|
+|depthwise_res_9_o          |  out|   10|     ap_ovld|       depthwise_res_9|       pointer|
+|depthwise_res_9_o_ap_vld   |  out|    1|     ap_ovld|       depthwise_res_9|       pointer|
+|depthwise_res_10_i         |   in|   10|     ap_ovld|      depthwise_res_10|       pointer|
+|depthwise_res_10_o         |  out|   10|     ap_ovld|      depthwise_res_10|       pointer|
+|depthwise_res_10_o_ap_vld  |  out|    1|     ap_ovld|      depthwise_res_10|       pointer|
+|depthwise_res_11_i         |   in|   10|     ap_ovld|      depthwise_res_11|       pointer|
+|depthwise_res_11_o         |  out|   10|     ap_ovld|      depthwise_res_11|       pointer|
+|depthwise_res_11_o_ap_vld  |  out|    1|     ap_ovld|      depthwise_res_11|       pointer|
+|res_0                      |  out|   10|      ap_vld|                 res_0|       pointer|
+|res_0_ap_vld               |  out|    1|      ap_vld|                 res_0|       pointer|
+|res_1                      |  out|   10|      ap_vld|                 res_1|       pointer|
+|res_1_ap_vld               |  out|    1|      ap_vld|                 res_1|       pointer|
+|res_2                      |  out|   10|      ap_vld|                 res_2|       pointer|
+|res_2_ap_vld               |  out|    1|      ap_vld|                 res_2|       pointer|
+|res_3                      |  out|   10|      ap_vld|                 res_3|       pointer|
+|res_3_ap_vld               |  out|    1|      ap_vld|                 res_3|       pointer|
+|res_4                      |  out|   10|      ap_vld|                 res_4|       pointer|
+|res_4_ap_vld               |  out|    1|      ap_vld|                 res_4|       pointer|
+|res_5                      |  out|   10|      ap_vld|                 res_5|       pointer|
+|res_5_ap_vld               |  out|    1|      ap_vld|                 res_5|       pointer|
+|res_6                      |  out|   10|      ap_vld|                 res_6|       pointer|
+|res_6_ap_vld               |  out|    1|      ap_vld|                 res_6|       pointer|
+|res_7                      |  out|   10|      ap_vld|                 res_7|       pointer|
+|res_7_ap_vld               |  out|    1|      ap_vld|                 res_7|       pointer|
+|depthwise_weights_0        |   in|   16|     ap_none|   depthwise_weights_0|       pointer|
+|depthwise_weights_1        |   in|   16|     ap_none|   depthwise_weights_1|       pointer|
+|depthwise_weights_2        |   in|   16|     ap_none|   depthwise_weights_2|       pointer|
+|depthwise_weights_3        |   in|   16|     ap_none|   depthwise_weights_3|       pointer|
+|depthwise_weights_4        |   in|   16|     ap_none|   depthwise_weights_4|       pointer|
+|depthwise_weights_5        |   in|   16|     ap_none|   depthwise_weights_5|       pointer|
+|depthwise_weights_6        |   in|   16|     ap_none|   depthwise_weights_6|       pointer|
+|depthwise_weights_7        |   in|   16|     ap_none|   depthwise_weights_7|       pointer|
+|depthwise_weights_8        |   in|   16|     ap_none|   depthwise_weights_8|       pointer|
+|depthwise_weights_9        |   in|   16|     ap_none|   depthwise_weights_9|       pointer|
+|depthwise_weights_10       |   in|   16|     ap_none|  depthwise_weights_10|       pointer|
+|depthwise_weights_11       |   in|   16|     ap_none|  depthwise_weights_11|       pointer|
+|pointwise_weights_0        |   in|   16|     ap_none|   pointwise_weights_0|       pointer|
+|pointwise_weights_1        |   in|   16|     ap_none|   pointwise_weights_1|       pointer|
+|pointwise_weights_2        |   in|   16|     ap_none|   pointwise_weights_2|       pointer|
+|pointwise_weights_3        |   in|   16|     ap_none|   pointwise_weights_3|       pointer|
+|pointwise_weights_4        |   in|   16|     ap_none|   pointwise_weights_4|       pointer|
+|pointwise_weights_5        |   in|   16|     ap_none|   pointwise_weights_5|       pointer|
+|depthwise_biases_address0  |  out|    2|   ap_memory|      depthwise_biases|         array|
+|depthwise_biases_ce0       |  out|    1|   ap_memory|      depthwise_biases|         array|
+|depthwise_biases_q0        |   in|   10|   ap_memory|      depthwise_biases|         array|
+|pointwise_biases_address0  |  out|    1|   ap_memory|      pointwise_biases|         array|
+|pointwise_biases_ce0       |  out|    1|   ap_memory|      pointwise_biases|         array|
+|pointwise_biases_q0        |   in|   10|   ap_memory|      pointwise_biases|         array|
+|pointwise_biases_address1  |  out|    1|   ap_memory|      pointwise_biases|         array|
+|pointwise_biases_ce1       |  out|    1|   ap_memory|      pointwise_biases|         array|
+|pointwise_biases_q1        |   in|   10|   ap_memory|      pointwise_biases|         array|
++---------------------------+-----+-----+------------+----------------------+--------------+
+

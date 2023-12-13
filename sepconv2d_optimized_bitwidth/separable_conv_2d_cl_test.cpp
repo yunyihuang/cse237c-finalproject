@@ -11,7 +11,6 @@ int main(){
 	conv_data_t dw_biases[n_chan] = {0,0,0};
 	conv_data_t pw_biases[n_filt] = {0,0};
 
-
 	separable_conv_2d_cl(data, dw_res, res, dw_kernel, pw_kernel, dw_biases, pw_biases);
 
 	for (int i = 0; i < 8; i++){
